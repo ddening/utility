@@ -43,15 +43,18 @@
 #define LED_PIN  PINA
 #define LED_DDR  DDRA
 #define LED_PORT PORTA
-#define LED0 0x00 /* reserved for co2 sensor */
-#define LED1 0x01 /* reserved for co2 sensor */
-#define LED2 0x02 /* reserved for co2 sensor */
+#define LED0 0x00 /* reserved for heartbeat */
+#define LED1 0x01 
+#define LED2 0x02
 #define LED3 0x03
 #define LED4 0x04 
 #define LED5 0x05 
 #define LED6 0x06 
 #define LED7 0x07 /* reserved for spi error code */
-#define LED_ERROR LED7
+
+#define LED_HEARTBEAT	LED0
+#define LED_ERROR		LED7
+
 
 /**
  * @brief Initialize led pins to indicate ppm status when using the co2 sensor and an error code for the <spi.h>.
