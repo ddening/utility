@@ -37,9 +37,9 @@
 
 /* User defined libraries */
 
-#define DEBUG 0
+#define MEMORY_DEBUG 0
 
-#if DEBUG
+#if MEMORY_DEBUG
 #define malloc(size) debug_malloc(size, __FILE__, __LINE__)
 #define free(ptr) debug_free(ptr, __FILE__, __LINE__)
 #endif
