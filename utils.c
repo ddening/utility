@@ -31,15 +31,28 @@
 
 /* General libraries */
 #include <stdint.h>
+#include <stdio.h>
+#include <math.h>
 
 /* User defined libraries */
 #include "utils.h"
 
 // Function to convert float to string manually (no %f dependency)
-void float_to_string(float value, uint8_t* buffer, uint8_t buffer_size, uint8_t precision) {
+void float_to_string(float value, char* buffer, uint8_t buffer_size, uint8_t precision) {
 	
-	uint16_t whole = (uint16_t)value;  // Get integer part
-	uint16_t decimal = (uint16_t)((value - whole) * 10 * precision); // Scale decimal part
+	// Handle negative values
+	int8_t is_negative = (value < 0);
+	if (is_negative) {
+		value = -value;  // Make value positive for further processing
+	}
 
-	snprintf(buffer, buffer_size, "%d.%d", whole, decimal);
+	uint16_t whole = (uint16_t)value;  // Get integer part
+	uint16_t decimal = (uint16_t)((value - whole) * pow(10, precision) + 0.5); // Scale decimal part
+
+	// Format the string with or without a negative sign
+	if (is_negative) {
+		snprintf(buffer, buffer_size, "-%d.%02d", whole, decimal);
+	} else {
+		snprintf(buffer, buffer_size, "%d.%02d", whole, decimal);
+	}
 }
