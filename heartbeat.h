@@ -37,5 +37,7 @@
 /* User defined libraries */
 
 void heartbeat_init(void);
+void start_timer(void);
+void stop_timer(void);
 
 #endif /* HEARTBEAT_H_ */

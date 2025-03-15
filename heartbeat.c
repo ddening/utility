@@ -53,6 +53,19 @@ static void timer1_init(void) {
 	// sei();
 }
 
+void start_timer(void) {
+	// Reset timer counter to 0
+	TCNT1 = 0;  
+	
+	// Enable Timer1 Compare Match A interrupt
+	TIMSK1 |= (1 << OCIE1A);
+}
+
+void stop_timer(void) {
+	// Disable Timer1 Compare Match A interrupt
+	TIMSK1 &= ~(1 << OCIE1A);
+}
+
 ISR(TIMER1_COMPA_vect) {
 	led_toggle(LED_HEARTBEAT);
 }
