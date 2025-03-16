@@ -32,13 +32,16 @@
 /* General libraries */
 #include <stdint.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 
 /* User defined libraries */
 #include "utils.h"
 
 // Function to convert float to string manually (no %f dependency)
-void float_to_string(float value, char* buffer, uint8_t buffer_size, uint8_t precision) {
+size_t float_to_string(float value, char* buffer, uint8_t buffer_size, uint8_t precision) {
+	
+	size_t num;
 	
 	// Handle negative values
 	int8_t is_negative = (value < 0);
@@ -51,8 +54,10 @@ void float_to_string(float value, char* buffer, uint8_t buffer_size, uint8_t pre
 
 	// Format the string with or without a negative sign
 	if (is_negative) {
-		snprintf(buffer, buffer_size, "-%d.%02d", whole, decimal);
+		num = snprintf(buffer, buffer_size, "-%d.%02d", whole, decimal);
 	} else {
-		snprintf(buffer, buffer_size, "%d.%02d", whole, decimal);
+		num = snprintf(buffer, buffer_size, "%d.%02d", whole, decimal);
 	}
+	
+	return num;
 }
